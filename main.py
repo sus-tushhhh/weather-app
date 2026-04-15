@@ -28,4 +28,7 @@ st.selectbox(
 
 
 if obj:=st.session_state.get('weather_data'):
-    st.write(json.dumps(obj.location, indent=4))
+    if obj.response.get('error'):
+        st.error('Location not found please use add state and/or country with it.')
+    else:
+        st.success(json.dumps(obj.location, indent=4))
