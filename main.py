@@ -12,8 +12,8 @@ def get_base_locations():
         return json.load(f)
 
 def load_weather():
-    location = st.session_state.get('location')
-    x = Weather(location)
+    location : str = st.session_state.get('location')
+    x = Weather(location.replace(',', ' '))
     x.get_response()
     st.session_state['weather_data'] = x
 
