@@ -2,3 +2,4 @@ httpx
 streamlit
 Pillow
 matplotlib
+streamlit-card
