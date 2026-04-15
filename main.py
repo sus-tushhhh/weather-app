@@ -13,7 +13,7 @@ def get_base_locations():
 
 def load_weather():
     location : str = st.session_state.get('location')
-    x = Weather(location.replace(',', ' '))
+    x = Weather(location.replace(',', ' ').lower())
     x.get_response()
     st.session_state['weather_data'] = x
 
@@ -29,6 +29,9 @@ st.selectbox(
 
 if obj:=st.session_state.get('weather_data'):
     if obj.response.get('error'):
-        st.error('Location not found please use add state and/or country with it.')
+        st.error('''Location not found please add state and/or country with it.
+                 \nExample : 
+                 \n\t- Bengalore Karnataka 
+                 \n\t- Bengalore Karnataka India''')
     else:
         st.success(json.dumps(obj.location, indent=4))
