@@ -17,7 +17,7 @@ def load_weather():
     x.get_response()
     st.session_state['weather_data'] = x
 
-left, right = st.columns[2, 1]
+left, right = st.columns([2, 1])
 
 with left :
     st.selectbox(
