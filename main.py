@@ -49,7 +49,7 @@ with right:
             styles = {
                 'card' : {
                     'height' : '400px',
-                    'width' : '400px'
+                    'width' : '100%'
                 },
                 'title' : {
                     'font-size' : 60
