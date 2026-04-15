@@ -13,14 +13,31 @@ class Weather:
         }
         
     def get_response(self):
-        self.response : dict = httpx.get(url=self.url, params=self.params).json()
+        try:
+            self.response : dict = httpx.get(url=self.url, params=self.params, timeout=10).json()
         
-        if self.response.get('error'):
-            print(self.response['error']['message'])
-        else:
-            print(self.response['location'])
+            if self.response.get('error'):
+                return False
+            else:
+                self.location    : dict = self.response.get('location')
+                self.current     : dict = self.response.get('current')
+                self.forecast    : dict = self.response.get('forecast')
+                self.forecastday : dict = self.forecast.get('forecastday')[0]
+                self.today       : dict = self.forecastday.get('day')
+                self.astro       : dict = self.forecastday.get('astro')
+                self.hourly      : list[dict] = self.forecastday.get('hour')
+                return True
+                
+        except httpx.ConnectTimeout as e:
+            return False
+
+        except Exception as e:
+            return False
+
 
 
 if __name__ == '__main__':
-    x = Weather('Delhi')
-    x.get_response()
+    x = Weather("Delhi")
+    if x.get_response():
+        for i, j in x.__dict__.items() :
+            print(i, j)
