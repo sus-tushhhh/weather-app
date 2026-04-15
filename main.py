@@ -18,6 +18,7 @@ def load_weather():
     st.session_state['weather_data'] = x
 
 st.selectbox(
+    label='',
     placeholder = 'Enter a city, state or country',
     options     = get_base_locations(),
     on_change   = load_weather,
